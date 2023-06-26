@@ -10,6 +10,9 @@ const PORT = 8080;
 app.set('view engine', 'ejs');
 app.set('views', path.resolve(__dirname, 'views'))
 
+app.use(express.urlencoded({ extended: true }))
+app.use(bodyParser.urlencoded({ extended: true }))
+
 app.use('/app', router)
 
 app.listen(PORT, () => {

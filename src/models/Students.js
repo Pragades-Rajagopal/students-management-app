@@ -62,7 +62,8 @@ module.exports = {
             UPDATE STUDENTS SET
             NAME = ?, STREAM = ?, DEPARTMENT = ?, 
             BATCH = ?, DOB = ?, MOBILE_NO = ?, EMAIL = ?
-            WHERE ID = ?`;
+            WHERE ID = ?
+            AND STATUS = ${constants.status.active}`;
             db.appDatabase.run(
                 sql,
                 [data.name, data.stream, data.department, data.batch, data.dob, data.mobile_no, data.email, id],
@@ -79,7 +80,11 @@ module.exports = {
 
     deleteStudentById: function (id) {
         return new Promise((resolve, reject) => {
-            const sql = `DELETE FROM STUDENTS WHERE ID=? AND STATUS=${constants.status.inactive}`;
+            const sql = `
+            UPDATE STUDENTS 
+            SET STATUS=${constants.status.inactive}
+            WHERE ID=? 
+            AND STATUS=${constants.status.active}`;
             db.appDatabase.run(
                 sql,
                 [id],

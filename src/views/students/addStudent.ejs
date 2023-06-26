@@ -1,0 +1,24 @@
+<%- include('../header') %>
+
+    <h3>Students Section</h3>
+    <h4>Add student</h4>
+    <br>
+    <div class="container">
+        <form action="/app/students/add" method="post">
+            <input class="form-control shadow-none mb-3 phText" type="text" name="name" id="inputName"
+                placeholder="Student name">
+            <input class="form-control shadow-none mb-3 phText" type="text" name="stream" id="inputStream"
+                placeholder="Stream">
+            <input class="form-control shadow-none mb-3 phText" type="text" name="department" id="inputDepartment"
+                placeholder="Department">
+            <input class="form-control shadow-none mb-3 phText" type="text" name="batch" id="inputBatch"
+                placeholder="Batch">
+            <input class="form-control shadow-none mb-3 phText" type="text" name="dob" id="inputDob" placeholder="DOB">
+            <input class="form-control shadow-none mb-3 phText" type="text" name="mobile_no" id="inputMobile"
+                placeholder="Mobile Number">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+
+    <%- include('../footer') %>
