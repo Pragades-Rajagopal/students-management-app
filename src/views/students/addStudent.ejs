@@ -42,8 +42,26 @@
                                                                                         type="text" name="mobile_no"
                                                                                         id="inputMobile"
                                                                                         placeholder="Mobile Number">
-                                                                                    <button type="submit"
-                                                                                        class="btn btn-primary">Submit</button>
+                                                                                    <input
+                                                                                        class="form-control shadow-none mb-3 phText"
+                                                                                        type="text" name="age"
+                                                                                        id="inputAge" placeholder="Age">
+                                                                                    <input
+                                                                                        class="form-control shadow-none mb-3 phText"
+                                                                                        type="text" name="address"
+                                                                                        id="inputAddress"
+                                                                                        placeholder="Address">
+                                                                                    <% if (errors.blood_group) { %>
+                                                                                        <%= errors.blood_group.msg %>
+                                                                                            <% } %>
+                                                                                                <input
+                                                                                                    class="form-control shadow-none mb-3 phText"
+                                                                                                    type="text"
+                                                                                                    name="blood_group"
+                                                                                                    id="inputBG"
+                                                                                                    placeholder="Blood Group">
+                                                                                                <button type="submit"
+                                                                                                    class="btn btn-primary">Submit</button>
         </form>
     </div>
 

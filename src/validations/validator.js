@@ -33,6 +33,10 @@ module.exports = {
         check('mobile_no')
             .isNumeric()
             .withMessage("Mobile Number should be of 10 digit numbers"),
+
+        check('blood_group')
+            .isLength({ min: 1 })
+            .withMessage("Blood Group is mandatory"),
     ],
 
     searchStudent: [
@@ -81,5 +85,9 @@ module.exports = {
         check('email')
             .isLength({ min: 1 })
             .withMessage("Email is mandatory"),
+
+        check('blood_group')
+            .isLength({ min: 1 })
+            .withMessage("Blood Group is mandatory"),
     ]
 }

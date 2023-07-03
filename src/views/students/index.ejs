@@ -12,6 +12,9 @@
                     <% if (errors.noData) { %>
                         <%= errors.noData %>
                             <% } %>
+                                <% if (errors.opsError) { %>
+                                    <%= errors.opsError %>
+                                        <% } %>
     </form>
 
     <%- include('../footer') %>

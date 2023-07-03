@@ -69,21 +69,51 @@
                                                                                                             <input
                                                                                                                 class="form-control shadow-none mb-3 phText"
                                                                                                                 type="text"
-                                                                                                                name="CREATED_ON"
-                                                                                                                id="inputCdate"
-                                                                                                                value="<%= data.CREATED_ON %>"
-                                                                                                                readonly>
+                                                                                                                name="age"
+                                                                                                                id="inputAge"
+                                                                                                                placeholder="Age"
+                                                                                                                value="<%= data.AGE %>">
                                                                                                             <input
                                                                                                                 class="form-control shadow-none mb-3 phText"
                                                                                                                 type="text"
-                                                                                                                name="MODIFIED_ON"
-                                                                                                                id="inputMdate"
-                                                                                                                value="<%= data.MODIFIED_ON %>"
-                                                                                                                readonly>
-                                                                                                            <button
-                                                                                                                type="submit"
-                                                                                                                class="btn btn-secondary">Update</button>
+                                                                                                                name="address"
+                                                                                                                id="inputAddress"
+                                                                                                                placeholder="Address"
+                                                                                                                value="<%= data.ADDRESS %>">
+                                                                                                            <% if
+                                                                                                                (errors.blood_group)
+                                                                                                                { %>
+                                                                                                                <%= errors.blood_group.msg
+                                                                                                                    %>
+                                                                                                                    <% }
+                                                                                                                        %>
+                                                                                                                        <input
+                                                                                                                            class="form-control shadow-none mb-3 phText"
+                                                                                                                            type="text"
+                                                                                                                            name="blood_group"
+                                                                                                                            id="inputBG"
+                                                                                                                            placeholder="Blood Group"
+                                                                                                                            value="<%= data.BLOOD_GROUP %>">
+                                                                                                                        <input
+                                                                                                                            class="form-control shadow-none mb-3 phText"
+                                                                                                                            type="text"
+                                                                                                                            name="CREATED_ON"
+                                                                                                                            id="inputCdate"
+                                                                                                                            value="<%= data.CREATED_ON %>"
+                                                                                                                            readonly>
+                                                                                                                        <input
+                                                                                                                            class="form-control shadow-none mb-3 phText"
+                                                                                                                            type="text"
+                                                                                                                            name="MODIFIED_ON"
+                                                                                                                            id="inputMdate"
+                                                                                                                            value="<%= data.MODIFIED_ON %>"
+                                                                                                                            readonly>
+                                                                                                                        <button
+                                                                                                                            type="submit"
+                                                                                                                            class="btn btn-secondary">Update</button>
         </form>
+        <br>
+        <a href="/app/students/delete/<%= data.ID %>" class="btn btn-danger">Delete</a>
     </div>
 
 

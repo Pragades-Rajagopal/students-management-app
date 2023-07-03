@@ -21,7 +21,24 @@ module.exports = {
 
     getStudentById: function (id) {
         return new Promise((resolve, reject) => {
-            const sql = `SELECT * FROM STUDENTS WHERE ID = ? AND STATUS = ${constants.status.active}`;
+            const sql = `SELECT S.ID,
+            S.NAME,
+            S.STREAM,
+            S.DEPARTMENT,           
+            S.BATCH,
+            S.DOB,
+            S.MOBILE_NO,
+            S.EMAIL,
+            S.STATUS,
+            S.CREATED_ON,
+            S.MODIFIED_ON,
+            SD.AGE,
+            SD.ADDRESS,
+            SD.BLOOD_GROUP
+            FROM STUDENTS S, STUDENT_DETAILS SD 
+            WHERE S.ID = ? 
+            AND S.STATUS = ${constants.status.active} 
+            AND SD.STUDENT_ID = S.ID`;
             db.appDatabase.get(
                 sql,
                 [id],
@@ -50,7 +67,17 @@ module.exports = {
                         console.log("[insertStudent model] error: ", err)
                         return reject('error')
                     }
-                    resolve('success')
+                    db.appDatabase.get(
+                        'SELECT MAX(ID) AS ID FROM STUDENTS',
+                        [],
+                        (err, result) => {
+                            if (err) {
+                                console.log("[insertStudent model] error: ", err)
+                                return reject({ msg: 'error', result: null })
+                            }
+                            return resolve({ msg: 'success', result: result })
+                        }
+                    )
                 }
             )
         })
@@ -122,7 +149,7 @@ module.exports = {
     updateStudentDetail: function (data, studentId) {
         return new Promise((resolve, reject) => {
             const sql = `
-            UPDATE STUDENTS SET
+            UPDATE STUDENT_DETAILS SET
             AGE=?, ADDRESS=?, BLOOD_GROUP=?
             WHERE STUDENT_ID=?`;
             db.appDatabase.run(

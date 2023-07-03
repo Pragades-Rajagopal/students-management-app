@@ -11,5 +11,6 @@ Router.get('/students/add', studentsController.getAddstudent)
 Router.post('/students/add', validators.addStudent, studentsController.addStudent)
 Router.post('/students/search', validators.searchStudent, studentsController.searchStudent)
 Router.post('/students/update', validators.updateStudent, studentsController.updateStudent)
+Router.get('/students/delete/:student_id', studentsController.deleteStudent)
 
 module.exports = Router;
