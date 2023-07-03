@@ -1,0 +1,90 @@
+<%- include('../header') %>
+
+    <h3>Students Section</h3>
+
+    <br>
+    <div class="container">
+        <h4>Search student</h4>
+        <form action="/app/students/update" method="post">
+            <% if (errors.successMsg) { %>
+                <%= errors.successMsg %>
+                    <% } %>
+                        <input class="form-control shadow-none mb-3 phText" type="text" name="id" id="inputName"
+                            placeholder="Student name" value="<%= data.ID %>" hidden>
+                        <% if (errors.name) { %>
+                            <%= errors.name.msg %>
+                                <% } %>
+                                    <input class="form-control shadow-none mb-3 phText" type="text" name="name"
+                                        id="inputName" placeholder="Student name" value="<%= data.NAME %>">
+                                    <% if (errors.stream) { %>
+                                        <%= errors.stream.msg %>
+                                            <% } %>
+                                                <input class="form-control shadow-none mb-3 phText" type="text"
+                                                    name="stream" id="inputStream" placeholder="Stream"
+                                                    value="<%= data.STREAM %>">
+                                                <% if (errors.department) { %>
+                                                    <%= errors.department.msg %>
+                                                        <% } %>
+                                                            <input class="form-control shadow-none mb-3 phText"
+                                                                type="text" name="department" id="inputDepartment"
+                                                                placeholder="Department" value="<%= data.DEPARTMENT %>">
+                                                            <% if (errors.batch) { %>
+                                                                <%= errors.batch.msg %>
+                                                                    <% } %>
+                                                                        <input
+                                                                            class="form-control shadow-none mb-3 phText"
+                                                                            type="text" name="batch" id="inputBatch"
+                                                                            placeholder="Batch"
+                                                                            value="<%= data.BATCH %>">
+                                                                        <% if (errors.dob) { %>
+                                                                            <%= errors.dob.msg %>
+                                                                                <% } %>
+                                                                                    <input
+                                                                                        class="form-control shadow-none mb-3 phText"
+                                                                                        type="text" name="dob"
+                                                                                        id="inputDob" placeholder="DOB"
+                                                                                        value="<%= data.DOB %>">
+                                                                                    <% if (errors.mobile_no) { %>
+                                                                                        <%= errors.mobile_no.msg %>
+                                                                                            <% } %>
+                                                                                                <input
+                                                                                                    class="form-control shadow-none mb-3 phText"
+                                                                                                    type="text"
+                                                                                                    name="mobile_no"
+                                                                                                    id="inputMobile"
+                                                                                                    placeholder="Mobile Number"
+                                                                                                    value="<%= data.MOBILE_NO %>">
+                                                                                                <% if (errors.email) {
+                                                                                                    %>
+                                                                                                    <%= errors.email.msg
+                                                                                                        %>
+                                                                                                        <% } %>
+                                                                                                            <input
+                                                                                                                class="form-control shadow-none mb-3 phText"
+                                                                                                                type="text"
+                                                                                                                name="email"
+                                                                                                                id="inputEmail"
+                                                                                                                placeholder="Email"
+                                                                                                                value="<%= data.EMAIL %>">
+                                                                                                            <input
+                                                                                                                class="form-control shadow-none mb-3 phText"
+                                                                                                                type="text"
+                                                                                                                name="CREATED_ON"
+                                                                                                                id="inputCdate"
+                                                                                                                value="<%= data.CREATED_ON %>"
+                                                                                                                readonly>
+                                                                                                            <input
+                                                                                                                class="form-control shadow-none mb-3 phText"
+                                                                                                                type="text"
+                                                                                                                name="MODIFIED_ON"
+                                                                                                                id="inputMdate"
+                                                                                                                value="<%= data.MODIFIED_ON %>"
+                                                                                                                readonly>
+                                                                                                            <button
+                                                                                                                type="submit"
+                                                                                                                class="btn btn-secondary">Update</button>
+        </form>
+    </div>
+
+
+    <%- include('../footer') %>
