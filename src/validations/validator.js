@@ -23,11 +23,7 @@ module.exports = {
             .withMessage("DOB is mandatory"),
 
         check('mobile_no')
-            .isLength({ min: 1 })
-            .withMessage("Mobile Number is mandatory"),
-
-        check('mobile_no')
-            .isLength({ max: 10 })
+            .isLength({ min: 10, max: 10 })
             .withMessage("Mobile Number should be of 10 digits"),
 
         check('mobile_no')
@@ -71,11 +67,7 @@ module.exports = {
             .withMessage("DOB is mandatory"),
 
         check('mobile_no')
-            .isLength({ min: 1 })
-            .withMessage("Mobile Number is mandatory"),
-
-        check('mobile_no')
-            .isLength({ max: 10 })
+            .isLength({ min: 10, max: 10 })
             .withMessage("Mobile Number should be of 10 digits"),
 
         check('mobile_no')
