@@ -1,6 +1,7 @@
 const models = require('../models/Students');
 const constants = require('../config/constants')
 const { validationResult } = require('express-validator');
+const { bloodGroup } = require('../config/studentDataConfig')
 
 module.exports = {
     getIndex: function (request, response) {
@@ -8,7 +9,7 @@ module.exports = {
     },
 
     getAddstudent: function (request, response) {
-        return response.render('students/addStudent', { errors: {} })
+        return response.render('students/addStudent', { errors: {}, bloodGroup: bloodGroup })
     },
 
     addStudent: async function (request, response) {
@@ -16,7 +17,8 @@ module.exports = {
             const validationErrors = validationResult(request);
             if (!validationErrors.isEmpty()) {
                 return response.render('students/addStudent', {
-                    errors: validationErrors.mapped()
+                    errors: validationErrors.mapped(),
+                    bloodGroup: bloodGroup
                 })
             }
             const name = request.body.name;
@@ -40,7 +42,7 @@ module.exports = {
 
             const result = await models.insertStudent(data);
             if (result.msg === constants.resultFlag.error) {
-                return response.render('students/addStudent', { errors: {} })
+                return response.render('students/addStudent', { errors: {}, bloodGroup: bloodGroup })
             }
             const studentId = result.result.ID;
             const addlData = {
@@ -51,7 +53,7 @@ module.exports = {
             }
             const addlResult = await models.insertStudentDetail(addlData);
             if (addlResult === constants.resultFlag.error) {
-                return response.render('students/addStudent', { errors: {} })
+                return response.render('students/addStudent', { errors: {}, bloodGroup: bloodGroup })
             }
             return response.render('students/index', { errors: {} })
 
@@ -72,7 +74,7 @@ module.exports = {
             if (!studentData) {
                 return response.render('students/index', { errors: { noData: "Student does not exists" } })
             }
-            return response.render('students/searchStudent', { data: studentData, errors: {} })
+            return response.render('students/searchStudent', { data: studentData, errors: {}, bloodGroup: bloodGroup })
         } catch (error) {
             console.log("[searchStudent controller] error: ", error)
             return response.render('students/index', { errors: { opsError: "Something went wrong while searching student" } })
@@ -87,7 +89,8 @@ module.exports = {
             if (!validationErrors.isEmpty()) {
                 return response.render('students/searchStudent', {
                     errors: validationErrors.mapped(),
-                    data: studentData
+                    data: studentData,
+                    bloodGroup: bloodGroup
                 })
             }
             const name = request.body.name;
@@ -123,13 +126,15 @@ module.exports = {
             if (updatedResult === constants.resultFlag.error) {
                 return response.render('students/searchStudent', {
                     errors: { updateError: "Unable to update data" },
-                    data: studentData
+                    data: studentData,
+                    bloodGroup: bloodGroup
                 })
             }
             const updatedStudentData = await models.getStudentById(id);
             return response.render('students/searchStudent', {
                 errors: { successMsg: "Data updated successfully" },
-                data: updatedStudentData
+                data: updatedStudentData,
+                bloodGroup: bloodGroup
             })
 
         } catch (error) {

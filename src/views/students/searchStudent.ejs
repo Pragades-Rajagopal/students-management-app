@@ -93,7 +93,25 @@
                                                                                                                             name="blood_group"
                                                                                                                             id="inputBG"
                                                                                                                             placeholder="Blood Group"
-                                                                                                                            value="<%= data.BLOOD_GROUP %>">
+                                                                                                                            value="<%= data.BLOOD_GROUP %>"
+                                                                                                                            list="BloodGroup">
+                                                                                                                        <datalist
+                                                                                                                            id="BloodGroup">
+                                                                                                                            <% for
+                                                                                                                                (const
+                                                                                                                                grp
+                                                                                                                                of
+                                                                                                                                bloodGroup)
+                                                                                                                                {
+                                                                                                                                %>
+                                                                                                                                <option
+                                                                                                                                    value="<%= grp.group %>">
+                                                                                                                                    <%= grp.group
+                                                                                                                                        %>
+                                                                                                                                </option>
+                                                                                                                                <% }
+                                                                                                                                    %>
+                                                                                                                        </datalist>
                                                                                                                         <input
                                                                                                                             class="form-control shadow-none mb-3 phText"
                                                                                                                             type="text"

@@ -59,7 +59,19 @@
                                                                                                     type="text"
                                                                                                     name="blood_group"
                                                                                                     id="inputBG"
-                                                                                                    placeholder="Blood Group">
+                                                                                                    placeholder="Blood Group"
+                                                                                                    list="BloodGroup">
+                                                                                                <datalist
+                                                                                                    id="BloodGroup">
+                                                                                                    <% for (const grp of
+                                                                                                        bloodGroup) { %>
+                                                                                                        <option
+                                                                                                            value="<%= grp.group %>">
+                                                                                                            <%= grp.group
+                                                                                                                %>
+                                                                                                        </option>
+                                                                                                        <% } %>
+                                                                                                </datalist>
                                                                                                 <button type="submit"
                                                                                                     class="btn btn-primary">Submit</button>
         </form>
