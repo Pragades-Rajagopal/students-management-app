@@ -1,6 +1,57 @@
 <%- include('../header') %>
-    <h3>Settings Page</h3>
 
-    <a class="btn btn-secondary" href="/app/home">Home</a>
+    <div class="container">
+        <h3>Settings Page</h3>
+        <br>
+        <form action="/app/settings/department/add" method="post">
+            <% if (message.department) { %>
+                <%= message.department.msg %>
+                    <% } %>
+                        <% if (message.errDept) { %>
+                            <%= message.errDept %>
+                                <% } %>
+                                    <% if (message.successDepartment) { %>
+                                        <%= message.successDepartment %>
+                                            <% } %>
+                                                <input class="form-control shadow-none mb-3 phText" type="text"
+                                                    name="department" id="inputDepartment"
+                                                    placeholder="Add new department" list="Departments">
+                                                <datalist id="Departments">
+                                                    <% for (const dept of departmentData) { %>
+                                                        <option value="<%= dept.NAME %>">
+                                                            <%= dept.NAME %>
+                                                        </option>
+                                                        <% } %>
+                                                </datalist>
+                                                <button class="btn btn-primary" type="submit">Add</button>
+        </form>
+        <br>
+        <form action="/app/settings/stream/add" method="post">
+            <% if (message.stream) { %>
+                <%= message.stream.msg %>
+                    <% } %>
+                        <% if (message.errStream) { %>
+                            <%= message.errStream %>
+                                <% } %>
+                                    <% if (message.successStream) { %>
+                                        <%= message.successStream %>
+                                            <% } %>
+                                                <input class="form-control shadow-none mb-3 phText" type="text"
+                                                    name="stream" id="inputStream" placeholder="Add new stream"
+                                                    list="Streams">
+                                                <datalist id="Streams">
+                                                    <% for (const stream of streamData) { %>
+                                                        <option value="<%= stream.NAME %>">
+                                                            <%= stream.NAME %>
+                                                        </option>
+                                                        <% } %>
+                                                </datalist>
+                                                <button class="btn btn-primary" type="submit">Add</button>
+        </form>
+        <br>
+        <br>
+        <a class="btn btn-secondary" href="/app/home">Home</a>
+    </div>
+
 
     <%- include('../footer') %>
