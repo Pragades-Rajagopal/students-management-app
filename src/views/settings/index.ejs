@@ -15,15 +15,31 @@
                                             <% } %>
                                                 <input class="form-control shadow-none mb-3 phText" type="text"
                                                     name="department" id="inputDepartment"
-                                                    placeholder="Add new department" list="Departments">
+                                                    placeholder="Add new department">
+                                                <button class="btn btn-primary" type="submit">Add</button>
+        </form>
+        <br>
+        <form action="/app/settings/department/delete" method="post">
+            <% if (message.deleteDepartment) { %>
+                <%= message.deleteDepartment.msg %>
+                    <% } %>
+                        <% if (message.errDeptDelete) { %>
+                            <%= message.errDeptDelete %>
+                                <% } %>
+                                    <% if (message.successDepartmentDelete) { %>
+                                        <%= message.successDepartmentDelete %>
+                                            <% } %>
+                                                <input class="form-control shadow-none mb-3 phText" type="text"
+                                                    name="deleteDepartment" id="inputDepartment"
+                                                    placeholder="Delete a department" list="Departments">
                                                 <datalist id="Departments">
                                                     <% for (const dept of departmentData) { %>
-                                                        <option value="<%= dept.NAME %>">
+                                                        <option value="<%= dept.ID %>">
                                                             <%= dept.NAME %>
                                                         </option>
                                                         <% } %>
                                                 </datalist>
-                                                <button class="btn btn-primary" type="submit">Add</button>
+                                                <button class="btn btn-danger" type="submit">Delete</button>
         </form>
         <br>
         <form action="/app/settings/stream/add" method="post">
@@ -37,16 +53,31 @@
                                         <%= message.successStream %>
                                             <% } %>
                                                 <input class="form-control shadow-none mb-3 phText" type="text"
-                                                    name="stream" id="inputStream" placeholder="Add new stream"
+                                                    name="stream" id="inputStream" placeholder="Add new stream">
+                                                <button class="btn btn-primary" type="submit">Add</button>
+        </form>
+        <br>
+        <form action="/app/settings/stream/delete" method="post">
+            <% if (message.deleteStream) { %>
+                <%= message.deleteStream.msg %>
+                    <% } %>
+                        <% if (message.errStreamDelete) { %>
+                            <%= message.errStreamDelete %>
+                                <% } %>
+                                    <% if (message.successStreamDelete) { %>
+                                        <%= message.successStreamDelete %>
+                                            <% } %>
+                                                <input class="form-control shadow-none mb-3 phText" type="text"
+                                                    name="deleteStream" id="inputStream" placeholder="Delete a stream"
                                                     list="Streams">
                                                 <datalist id="Streams">
                                                     <% for (const stream of streamData) { %>
-                                                        <option value="<%= stream.NAME %>">
+                                                        <option value="<%= stream.ID %>">
                                                             <%= stream.NAME %>
                                                         </option>
                                                         <% } %>
                                                 </datalist>
-                                                <button class="btn btn-primary" type="submit">Add</button>
+                                                <button class="btn btn-danger" type="submit">Delete</button>
         </form>
         <br>
         <br>

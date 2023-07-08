@@ -10,9 +10,9 @@ module.exports = {
     },
 
     addDepartment: async function (request, response) {
+        const departmentData = await getAllDepartments()
+        const streamData = await getAllStreams()
         try {
-            const departmentData = await getAllDepartments()
-            const streamData = await getAllStreams()
             const errors = validationResult(request);
             if (!errors.isEmpty()) {
                 return response.render('settings/index', { message: errors.mapped(), departmentData: departmentData, streamData: streamData })
@@ -30,10 +30,32 @@ module.exports = {
         }
     },
 
-    addStream: async function (request, response) {
+    deleteDepartment: async function (request, response) {
+        console.log("request.body.deleteDepartment", request.body.deleteDepartment)
+        const departmentData = await getAllDepartments()
+        console.log(departmentData);
+        const streamData = await getAllStreams()
         try {
-            const departmentData = await getAllDepartments()
-            const streamData = await getAllStreams()
+            const errors = validationResult(request);
+            if (!errors.isEmpty()) {
+                return response.render('settings/index', { message: errors.mapped(), departmentData: departmentData, streamData: streamData })
+            }
+            const id = request.body.deleteDepartment;
+            const result = await models.deleteDepartment(id)
+            if (result === constants.resultFlag.error) {
+                return response.render('settings/index', { message: { errDeptDelete: 'Unable to delete department' }, departmentData: departmentData, streamData: streamData })
+            }
+            return response.render('settings/index', { message: { successDepartmentDelete: 'Department deleted successfully' }, departmentData: departmentData, streamData: streamData })
+        } catch (error) {
+            console.log("[deleteDepartment controller] error: ", error);
+            return response.render('settings/index', { message: { errDeptDelete: 'Unable to delete department' }, departmentData: departmentData, streamData: streamData })
+        }
+    },
+
+    addStream: async function (request, response) {
+        const departmentData = await getAllDepartments()
+        const streamData = await getAllStreams()
+        try {
             const errors = validationResult(request);
             if (!errors.isEmpty()) {
                 return response.render('settings/index', { message: errors.mapped(), departmentData: departmentData, streamData: streamData })
@@ -49,7 +71,27 @@ module.exports = {
             console.log("[addStream controller] error: ", error);
             return response.render('settings/index', { message: { errStream: 'Unable to add stream' }, departmentData: departmentData, streamData: streamData })
         }
-    }
+    },
+
+    deleteStream: async function (request, response) {
+        const departmentData = await getAllDepartments()
+        const streamData = await getAllStreams()
+        try {
+            const errors = validationResult(request);
+            if (!errors.isEmpty()) {
+                return response.render('settings/index', { message: errors.mapped(), departmentData: departmentData, streamData: streamData })
+            }
+            const id = request.body.deleteStream;
+            const result = await models.deleteStream(id)
+            if (result === constants.resultFlag.error) {
+                return response.render('settings/index', { message: { errStreamDelete: 'Unable to delete stream' }, departmentData: departmentData, streamData: streamData })
+            }
+            return response.render('settings/index', { message: { successStreamDelete: 'Stream deleted successfully' }, departmentData: departmentData, streamData: streamData })
+        } catch (error) {
+            console.log("[deleteStream controller] error: ", error);
+            return response.render('settings/index', { message: { errStreamDelete: 'Unable to delete stream' }, departmentData: departmentData, streamData: streamData })
+        }
+    },
 }
 
 const getAllDepartments = async () => {
