@@ -7,7 +7,6 @@ module.exports = {
         { group: "B+" },
         { group: "B-" },
         { group: "AB+" },
-        { group: "AB-" },
-        { group: "Test" },
+        { group: "AB-" }
     ]
 }
