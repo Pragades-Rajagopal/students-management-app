@@ -1,0 +1,65 @@
+body {
+    background-color: hsl(203, 92%, 75%, 50%);
+}
+
+.bg-light {
+    background-color: hsl(0, 4%, 15%) !important;
+}
+
+.navbar {
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.navbar-brand,
+.nav-link {
+    color: hsl(0, 0%, 100%) !important;
+}
+
+h3 {
+    text-align: center;
+    text-transform: lowercase;
+}
+
+.welcomepage-container {
+    text-align: left;
+    padding-top: 50px;
+}
+
+.footer-container {
+    background-color: hsl(0, 4%, 15%) !important;
+    color: white;
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.card-link {
+    text-decoration: none !important;
+    color: hsl(39, 100%, 50%);
+}
+
+.card-link:hover {
+    color: blue !important;
+}
+
+.card-body {
+    background-color: hsl(0, 4%, 15%) !important;
+    color: white;
+}
+
+.card,
+.card-body {
+    border-radius: 25px;
+}
+
+.error-msg {
+    color: red;
+    padding-bottom: 2px;
+}
+
+.container-shrink {
+    padding-left: 200px;
+    padding-right: 200px;
+}
