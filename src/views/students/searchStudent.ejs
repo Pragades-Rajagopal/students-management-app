@@ -3,147 +3,201 @@
     <h3>Students Section</h3>
 
     <br>
-    <div class="container">
+    <div class="container container-shrink">
         <h4>Search student</h4>
         <form action="/app/students/update" method="post">
             <% if (errors.successMsg) { %>
-                <%= errors.successMsg %>
-                    <% } %>
-                        <input class="form-control shadow-none mb-3 phText" type="text" name="id" id="inputName"
-                            placeholder="Student name" value="<%= data.ID %>" hidden>
-                        <% if (errors.name) { %>
+                <p style="color: green;">
+                    <%= errors.successMsg %>
+                </p>
+                <% } %>
+                    <input class="form-control shadow-none mb-3 phText" type="text" name="id" id="inputName"
+                        placeholder="Student name" value="<%= data.ID %>" hidden>
+                    <% if (errors.name) { %>
+                        <div class="error-msg">
                             <%= errors.name.msg %>
-                                <% } %>
-                                    <input class="form-control shadow-none mb-3 phText" type="text" name="name"
-                                        id="inputName" placeholder="Student name" value="<%= data.NAME %>">
-                                    <% if (errors.stream) { %>
+                        </div>
+                        <% } else { %>
+                            <label for="inputName">Student Name</label>
+                            <% } %>
+                                <input class="form-control shadow-none mb-3 phText" type="text" name="name"
+                                    id="inputName" placeholder="Student name" value="<%= data.NAME %>">
+                                <% if (errors.stream) { %>
+                                    <div class="error-msg">
                                         <%= errors.stream.msg %>
-                                            <% } %>
-                                                <input class="form-control shadow-none mb-3 phText" type="text"
-                                                    name="stream" id="inputStream" placeholder="Stream"
-                                                    value="<%= data.STREAM %>" list="Streams">
-                                                <datalist id="Streams">
-                                                    <% for (const stream of streamData) { %>
-                                                        <option value="<%= stream.NAME %>">
-                                                            <%= stream.NAME %>
-                                                        </option>
-                                                        <% } %>
-                                                </datalist>
-                                                <% if (errors.department) { %>
+                                    </div>
+                                    <% } else { %>
+                                        <label for="inputStream">Stream</label>
+                                        <% } %>
+                                            <input class="form-control shadow-none mb-3 phText" type="text"
+                                                name="stream" id="inputStream" placeholder="Stream"
+                                                value="<%= data.STREAM %>" list="Streams">
+                                            <datalist id="Streams">
+                                                <% for (const stream of streamData) { %>
+                                                    <option value="<%= stream.NAME %>">
+                                                        <%= stream.NAME %>
+                                                    </option>
+                                                    <% } %>
+                                            </datalist>
+                                            <% if (errors.department) { %>
+                                                <div class="error-msg">
                                                     <%= errors.department.msg %>
-                                                        <% } %>
-                                                            <input class="form-control shadow-none mb-3 phText"
-                                                                type="text" name="department" id="inputDepartment"
-                                                                placeholder="Department" value="<%= data.DEPARTMENT %>"
-                                                                list="Departments">
-                                                            <datalist id="Departments">
-                                                                <% for (const dept of departmentData) { %>
-                                                                    <option value="<%= dept.NAME %>">
-                                                                        <%= dept.NAME %>
-                                                                    </option>
-                                                                    <% } %>
-                                                            </datalist>
-                                                            <% if (errors.batch) { %>
+                                                </div>
+                                                <% } else { %>
+                                                    <label for="inputDepartment">Department</label>
+                                                    <% } %>
+                                                        <input class="form-control shadow-none mb-3 phText" type="text"
+                                                            name="department" id="inputDepartment"
+                                                            placeholder="Department" value="<%= data.DEPARTMENT %>"
+                                                            list="Departments">
+                                                        <datalist id="Departments">
+                                                            <% for (const dept of departmentData) { %>
+                                                                <option value="<%= dept.NAME %>">
+                                                                    <%= dept.NAME %>
+                                                                </option>
+                                                                <% } %>
+                                                        </datalist>
+                                                        <% if (errors.batch) { %>
+                                                            <div class="error-msg">
                                                                 <%= errors.batch.msg %>
-                                                                    <% } %>
-                                                                        <input
-                                                                            class="form-control shadow-none mb-3 phText"
-                                                                            type="text" name="batch" id="inputBatch"
-                                                                            placeholder="Batch"
-                                                                            value="<%= data.BATCH %>">
-                                                                        <% if (errors.dob) { %>
+                                                            </div>
+                                                            <% } else { %>
+                                                                <label for="inputBatch">Batch</label>
+                                                                <% } %>
+                                                                    <input class="form-control shadow-none mb-3 phText"
+                                                                        type="text" name="batch" id="inputBatch"
+                                                                        placeholder="Batch" value="<%= data.BATCH %>">
+                                                                    <% if (errors.dob) { %>
+                                                                        <div class="error-msg">
                                                                             <%= errors.dob.msg %>
-                                                                                <% } %>
-                                                                                    <input
-                                                                                        class="form-control shadow-none mb-3 phText"
-                                                                                        type="text" name="dob"
-                                                                                        id="inputDob" placeholder="DOB"
-                                                                                        value="<%= data.DOB %>">
-                                                                                    <% if (errors.mobile_no) { %>
+                                                                        </div>
+                                                                        <% } else { %>
+                                                                            <label for="inputDob">DOB</label>
+                                                                            <% } %>
+                                                                                <input
+                                                                                    class="form-control shadow-none mb-3 phText"
+                                                                                    type="text" name="dob" id="inputDob"
+                                                                                    placeholder="DOB"
+                                                                                    value="<%= data.DOB %>">
+                                                                                <% if (errors.mobile_no) { %>
+                                                                                    <div class="error-msg">
                                                                                         <%= errors.mobile_no.msg %>
-                                                                                            <% } %>
-                                                                                                <input
-                                                                                                    class="form-control shadow-none mb-3 phText"
-                                                                                                    type="text"
-                                                                                                    name="mobile_no"
-                                                                                                    id="inputMobile"
-                                                                                                    placeholder="Mobile Number"
-                                                                                                    value="<%= data.MOBILE_NO %>">
-                                                                                                <% if (errors.email) {
-                                                                                                    %>
+                                                                                    </div>
+                                                                                    <% } else { %>
+                                                                                        <label for="inputMobile">Mobile
+                                                                                            Number</label>
+                                                                                        <% } %>
+                                                                                            <input
+                                                                                                class="form-control shadow-none mb-3 phText"
+                                                                                                type="text"
+                                                                                                name="mobile_no"
+                                                                                                id="inputMobile"
+                                                                                                placeholder="Mobile Number"
+                                                                                                value="<%= data.MOBILE_NO %>">
+                                                                                            <% if (errors.email) { %>
+                                                                                                <div class="error-msg">
                                                                                                     <%= errors.email.msg
                                                                                                         %>
-                                                                                                        <% } %>
-                                                                                                            <input
-                                                                                                                class="form-control shadow-none mb-3 phText"
-                                                                                                                type="text"
-                                                                                                                name="email"
-                                                                                                                id="inputEmail"
-                                                                                                                placeholder="Email"
-                                                                                                                value="<%= data.EMAIL %>">
-                                                                                                            <input
-                                                                                                                class="form-control shadow-none mb-3 phText"
-                                                                                                                type="text"
-                                                                                                                name="age"
-                                                                                                                id="inputAge"
-                                                                                                                placeholder="Age"
-                                                                                                                value="<%= data.AGE %>">
-                                                                                                            <input
-                                                                                                                class="form-control shadow-none mb-3 phText"
-                                                                                                                type="text"
-                                                                                                                name="address"
-                                                                                                                id="inputAddress"
-                                                                                                                placeholder="Address"
-                                                                                                                value="<%= data.ADDRESS %>">
-                                                                                                            <% if
-                                                                                                                (errors.blood_group)
-                                                                                                                { %>
+                                                                                                </div>
+                                                                                                <% } else { %>
+                                                                                                    <label
+                                                                                                        for="inputEmail">Email</label>
+                                                                                                    <% } %>
+                                                                                                        <input
+                                                                                                            class="form-control shadow-none mb-3 phText"
+                                                                                                            type="text"
+                                                                                                            name="email"
+                                                                                                            id="inputEmail"
+                                                                                                            placeholder="Email"
+                                                                                                            value="<%= data.EMAIL %>">
+                                                                                                        <label
+                                                                                                            for="inputAge">Age</label>
+                                                                                                        <input
+                                                                                                            class="form-control shadow-none mb-3 phText"
+                                                                                                            type="text"
+                                                                                                            name="age"
+                                                                                                            id="inputAge"
+                                                                                                            placeholder="Age"
+                                                                                                            value="<%= data.AGE %>">
+                                                                                                        <label
+                                                                                                            for="inputAddress">Address</label>
+                                                                                                        <input
+                                                                                                            class="form-control shadow-none mb-3 phText"
+                                                                                                            type="text"
+                                                                                                            name="address"
+                                                                                                            id="inputAddress"
+                                                                                                            placeholder="Address"
+                                                                                                            value="<%= data.ADDRESS %>">
+                                                                                                        <% if
+                                                                                                            (errors.blood_group)
+                                                                                                            { %>
+                                                                                                            <div
+                                                                                                                class="error-msg">
                                                                                                                 <%= errors.blood_group.msg
                                                                                                                     %>
-                                                                                                                    <% }
-                                                                                                                        %>
-                                                                                                                        <input
-                                                                                                                            class="form-control shadow-none mb-3 phText"
-                                                                                                                            type="text"
-                                                                                                                            name="blood_group"
-                                                                                                                            id="inputBG"
-                                                                                                                            placeholder="Blood Group"
-                                                                                                                            value="<%= data.BLOOD_GROUP %>"
-                                                                                                                            list="BloodGroup">
-                                                                                                                        <datalist
-                                                                                                                            id="BloodGroup">
-                                                                                                                            <% for
-                                                                                                                                (const
-                                                                                                                                grp
-                                                                                                                                of
-                                                                                                                                bloodGroup)
-                                                                                                                                {
-                                                                                                                                %>
-                                                                                                                                <option
-                                                                                                                                    value="<%= grp.group %>">
-                                                                                                                                    <%= grp.group
-                                                                                                                                        %>
-                                                                                                                                </option>
-                                                                                                                                <% }
+                                                                                                            </div>
+                                                                                                            <% } else {
+                                                                                                                %>
+                                                                                                                <label
+                                                                                                                    for="inputName">Blood
+                                                                                                                    Group</label>
+                                                                                                                <% } %>
+                                                                                                                    <input
+                                                                                                                        class="form-control shadow-none mb-3 phText"
+                                                                                                                        type="text"
+                                                                                                                        name="blood_group"
+                                                                                                                        id="inputBG"
+                                                                                                                        placeholder="Blood Group"
+                                                                                                                        value="<%= data.BLOOD_GROUP %>"
+                                                                                                                        list="BloodGroup">
+                                                                                                                    <datalist
+                                                                                                                        id="BloodGroup">
+                                                                                                                        <% for
+                                                                                                                            (const
+                                                                                                                            grp
+                                                                                                                            of
+                                                                                                                            bloodGroup)
+                                                                                                                            {
+                                                                                                                            %>
+                                                                                                                            <option
+                                                                                                                                value="<%= grp.group %>">
+                                                                                                                                <%= grp.group
                                                                                                                                     %>
-                                                                                                                        </datalist>
-                                                                                                                        <input
-                                                                                                                            class="form-control shadow-none mb-3 phText"
-                                                                                                                            type="text"
-                                                                                                                            name="CREATED_ON"
-                                                                                                                            id="inputCdate"
-                                                                                                                            value="<%= data.CREATED_ON %>"
-                                                                                                                            readonly>
-                                                                                                                        <input
-                                                                                                                            class="form-control shadow-none mb-3 phText"
-                                                                                                                            type="text"
-                                                                                                                            name="MODIFIED_ON"
-                                                                                                                            id="inputMdate"
-                                                                                                                            value="<%= data.MODIFIED_ON %>"
-                                                                                                                            readonly>
-                                                                                                                        <button
-                                                                                                                            type="submit"
-                                                                                                                            class="btn btn-secondary">Update</button>
+                                                                                                                            </option>
+                                                                                                                            <% }
+                                                                                                                                %>
+                                                                                                                    </datalist>
+                                                                                                                    <table>
+                                                                                                                        <tr>
+                                                                                                                            <td>
+                                                                                                                                <label
+                                                                                                                                    for="inputCdate">Created
+                                                                                                                                    On</label>
+                                                                                                                                <input
+                                                                                                                                    class="form-control shadow-none mb-3 phText"
+                                                                                                                                    type="text"
+                                                                                                                                    name="CREATED_ON"
+                                                                                                                                    id="inputCdate"
+                                                                                                                                    value="<%= data.CREATED_ON %>"
+                                                                                                                                    readonly>
+                                                                                                                            </td>
+                                                                                                                            <td>
+                                                                                                                                <label
+                                                                                                                                    for="inputMdate">Modified
+                                                                                                                                    On</label>
+                                                                                                                                <input
+                                                                                                                                    class="form-control shadow-none mb-3 phText"
+                                                                                                                                    type="text"
+                                                                                                                                    name="MODIFIED_ON"
+                                                                                                                                    id="inputMdate"
+                                                                                                                                    value="<%= data.MODIFIED_ON %>"
+                                                                                                                                    readonly>
+                                                                                                                            </td>
+                                                                                                                        </tr>
+                                                                                                                    </table>
+                                                                                                                    <button
+                                                                                                                        type="submit"
+                                                                                                                        class="btn btn-secondary">Update</button>
         </form>
         <br>
         <a href="/app/students/delete/<%= data.ID %>" class="btn btn-danger">Delete</a>

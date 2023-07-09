@@ -3,92 +3,100 @@
     <h3>Students Section</h3>
 
     <br>
-    <div class="container">
+    <div class="container container-shrink">
         <h4>Add student</h4>
         <form action="/app/students/add" method="post">
             <% if (errors.name) { %>
-                <%= errors.name.msg %>
-                    <% } %>
-                        <input class="form-control shadow-none mb-3 phText" type="text" name="name" id="inputName"
-                            placeholder="Student name">
-                        <% if (errors.stream) { %>
+                <div class="error-msg">
+                    <%= errors.name.msg %>
+                </div>
+                <% } %>
+                    <input class="form-control shadow-none mb-3 phText" type="text" name="name" id="inputName"
+                        placeholder="Student name">
+                    <% if (errors.stream) { %>
+                        <div class="error-msg">
                             <%= errors.stream.msg %>
+                        </div>
+                        <% } %>
+                            <input class="form-control shadow-none mb-3 phText" type="text" name="stream"
+                                id="inputStream" placeholder="Stream" list="Streams">
+                            <datalist id="Streams">
+                                <% for (const stream of streamData) { %>
+                                    <option value="<%= stream.NAME %>">
+                                        <%= stream.NAME %>
+                                    </option>
+                                    <% } %>
+                            </datalist>
+                            <% if (errors.department) { %>
+                                <div class="error-msg">
+                                    <%= errors.department.msg %>
+                                </div>
                                 <% } %>
-                                    <input class="form-control shadow-none mb-3 phText" type="text" name="stream"
-                                        id="inputStream" placeholder="Stream" list="Streams">
-                                    <datalist id="Streams">
-                                        <% for (const stream of streamData) { %>
-                                            <option value="<%= stream.NAME %>">
-                                                <%= stream.NAME %>
+                                    <input class="form-control shadow-none mb-3 phText" type="text" name="department"
+                                        id="inputDepartment" placeholder="Department" list="Departments">
+                                    <datalist id="Departments">
+                                        <% for (const dept of departmentData) { %>
+                                            <option value="<%= dept.NAME %>">
+                                                <%= dept.NAME %>
                                             </option>
                                             <% } %>
                                     </datalist>
-                                    <% if (errors.department) { %>
-                                        <%= errors.department.msg %>
-                                            <% } %>
-                                                <input class="form-control shadow-none mb-3 phText" type="text"
-                                                    name="department" id="inputDepartment" placeholder="Department"
-                                                    list="Departments">
-                                                <datalist id="Departments">
-                                                    <% for (const dept of departmentData) { %>
-                                                        <option value="<%= dept.NAME %>">
-                                                            <%= dept.NAME %>
-                                                        </option>
-                                                        <% } %>
-                                                </datalist>
-                                                <% if (errors.batch) { %>
-                                                    <%= errors.batch.msg %>
-                                                        <% } %>
-                                                            <input class="form-control shadow-none mb-3 phText"
-                                                                type="text" name="batch" id="inputBatch"
-                                                                placeholder="Batch">
-                                                            <% if (errors.dob) { %>
+                                    <% if (errors.mobile_no) { %>
+                                        <div class="error-msg">
+                                            <%= errors.mobile_no.msg %>
+                                        </div>
+                                        <% } %>
+                                            <input class="form-control shadow-none mb-3 phText" type="text"
+                                                name="mobile_no" id="inputMobile" placeholder="Mobile Number">
+                                            <input class="form-control shadow-none mb-3 phText" type="text"
+                                                name="address" id="inputAddress" placeholder="Address">
+
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <% if (errors.dob) { %>
+                                                            <div class="error-msg">
                                                                 <%= errors.dob.msg %>
-                                                                    <% } %>
-                                                                        <input
-                                                                            class="form-control shadow-none mb-3 phText"
-                                                                            type="text" name="dob" id="inputDob"
-                                                                            placeholder="DOB">
-                                                                        <% if (errors.mobile_no) { %>
-                                                                            <%= errors.mobile_no.msg %>
-                                                                                <% } %>
-                                                                                    <input
-                                                                                        class="form-control shadow-none mb-3 phText"
-                                                                                        type="text" name="mobile_no"
-                                                                                        id="inputMobile"
-                                                                                        placeholder="Mobile Number">
-                                                                                    <input
-                                                                                        class="form-control shadow-none mb-3 phText"
-                                                                                        type="text" name="age"
-                                                                                        id="inputAge" placeholder="Age">
-                                                                                    <input
-                                                                                        class="form-control shadow-none mb-3 phText"
-                                                                                        type="text" name="address"
-                                                                                        id="inputAddress"
-                                                                                        placeholder="Address">
-                                                                                    <% if (errors.blood_group) { %>
-                                                                                        <%= errors.blood_group.msg %>
-                                                                                            <% } %>
-                                                                                                <input
-                                                                                                    class="form-control shadow-none mb-3 phText"
-                                                                                                    type="text"
-                                                                                                    name="blood_group"
-                                                                                                    id="inputBG"
-                                                                                                    placeholder="Blood Group"
-                                                                                                    list="BloodGroup">
-                                                                                                <datalist
-                                                                                                    id="BloodGroup">
-                                                                                                    <% for (const grp of
-                                                                                                        bloodGroup) { %>
-                                                                                                        <option
-                                                                                                            value="<%= grp.group %>">
-                                                                                                            <%= grp.group
-                                                                                                                %>
-                                                                                                        </option>
-                                                                                                        <% } %>
-                                                                                                </datalist>
-                                                                                                <button type="submit"
-                                                                                                    class="btn btn-primary">Submit</button>
+                                                            </div>
+                                                            <% } %>
+                                                                <input class="form-control shadow-none mb-3 phText"
+                                                                    type="text" name="dob" id="inputDob"
+                                                                    placeholder="DOB">
+                                                    </td>
+                                                    <td>
+                                                        <input class="form-control shadow-none mb-3 phText" type="text"
+                                                            name="age" id="inputAge" placeholder="Age">
+                                                    </td>
+                                                    <td>
+                                                        <% if (errors.blood_group) { %>
+                                                            <div class="error-msg">
+                                                                <%= errors.blood_group.msg %>
+                                                            </div>
+                                                            <% } %>
+                                                                <input class="form-control shadow-none mb-3 phText"
+                                                                    type="text" name="blood_group" id="inputBG"
+                                                                    placeholder="Blood Group" list="BloodGroup">
+                                                                <datalist id="BloodGroup">
+                                                                    <% for (const grp of bloodGroup) { %>
+                                                                        <option value="<%= grp.group %>">
+                                                                            <%= grp.group %>
+                                                                        </option>
+                                                                        <% } %>
+                                                                </datalist>
+                                                    </td>
+                                                    <td>
+                                                        <% if (errors.batch) { %>
+                                                            <div class="error-msg">
+                                                                <%= errors.batch.msg %>
+                                                            </div>
+                                                            <% } %>
+                                                                <input class="form-control shadow-none mb-3 phText"
+                                                                    type="text" name="batch" id="inputBatch"
+                                                                    placeholder="Batch">
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
 

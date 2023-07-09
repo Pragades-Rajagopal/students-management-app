@@ -1,47 +1,58 @@
 <%- include('../header') %>
-
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable({
+                "paging": true,
+                "searching": true,
+                "ordering": true,
+                order: [[0, 'desc']],
+            });
+        });
+    </script>
     <h3>Students Section</h3>
 
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>NAME</th>
-            <th>STREAM</th>
-            <th>DEPARTMENT</th>
-            <th>BATCH</th>
-            <th>MOBILE NO</th>
-            <th>EMAIL</th>
-            <th>BLOOD GROUP</th>
-        </tr>
-        <% for (const d of data) { %>
+    <div class="container">
+        <table id="myTable">
             <tr>
-                <td>
-                    <%= d.STUDENT_ID %>
-                </td>
-                <td>
-                    <%= d.NAME %>
-                </td>
-                <td>
-                    <%= d.STREAM %>
-                </td>
-                <td>
-                    <%= d.DEPARTMENT %>
-                </td>
-                <td>
-                    <%= d.BATCH %>
-                </td>
-                <td>
-                    <%= d.MOBILE_NO %>
-                </td>
-                <td>
-                    <%= d.EMAIL %>
-                </td>
-                <td>
-                    <%= d.BLOOD_GROUP %>
-                </td>
+                <th>ID</th>
+                <th>NAME</th>
+                <th>STREAM</th>
+                <th>DEPARTMENT</th>
+                <th>BATCH</th>
+                <th>MOBILE NO</th>
+                <th>EMAIL</th>
+                <th>BLOOD GROUP</th>
             </tr>
-            <% } %>
-    </table>
-    <a class="btn btn-secondary" href="/app/students">Back</a>
+            <% for (const d of data) { %>
+                <tr>
+                    <td>
+                        <%= d.STUDENT_ID %>
+                    </td>
+                    <td>
+                        <%= d.NAME %>
+                    </td>
+                    <td>
+                        <%= d.STREAM %>
+                    </td>
+                    <td>
+                        <%= d.DEPARTMENT %>
+                    </td>
+                    <td>
+                        <%= d.BATCH %>
+                    </td>
+                    <td>
+                        <%= d.MOBILE_NO %>
+                    </td>
+                    <td>
+                        <%= d.EMAIL %>
+                    </td>
+                    <td>
+                        <%= d.BLOOD_GROUP %>
+                    </td>
+                </tr>
+                <% } %>
+        </table>
+        <a class="btn btn-secondary" href="/app/students">Back</a>
+    </div>
 
     <%- include('../footer') %>

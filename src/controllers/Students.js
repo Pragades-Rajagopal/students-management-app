@@ -1,3 +1,7 @@
+const fastcsv = require('fast-csv')
+const moment = require('moment')
+const path = require('path')
+const fs = require('fs')
 const studentsModel = require('../models/Students');
 const settingsModel = require('../models/Settings')
 const constants = require('../config/constants')
@@ -6,7 +10,7 @@ const { bloodGroup } = require('../config/studentDataConfig')
 
 module.exports = {
     getIndex: function (request, response) {
-        return response.render('students/index', { errors: {} })
+        return response.render('students/index', { errors: {}, fileName: null })
     },
 
     getAddstudent: async function (request, response) {
@@ -78,11 +82,11 @@ module.exports = {
                     streamData: streamData
                 })
             }
-            return response.render('students/index', { errors: {} })
+            return response.render('students/index', { errors: {}, fileName: null })
 
         } catch (error) {
             console.log("[addStudent controller] error: ", error)
-            return response.render('students/index', { errors: { opsError: "Something went wrong while adding student" } })
+            return response.render('students/index', { errors: { opsError: "Something went wrong while adding student" }, fileName: null })
         }
     },
 
@@ -92,12 +96,12 @@ module.exports = {
             const streamData = await getAllStreams()
             const validationErrors = validationResult(request)
             if (!validationErrors.isEmpty()) {
-                return response.render('students/index', { errors: validationErrors.mapped() })
+                return response.render('students/index', { errors: validationErrors.mapped(), fileName: null })
             }
             const studentId = request.body.student_id;
             const studentData = await studentsModel.getStudentById(studentId)
             if (!studentData) {
-                return response.render('students/index', { errors: { noData: "Student does not exists" } })
+                return response.render('students/index', { errors: { noData: "Student does not exists" }, fileName: null })
             }
             return response.render('students/searchStudent', {
                 data: studentData,
@@ -108,7 +112,7 @@ module.exports = {
             })
         } catch (error) {
             console.log("[searchStudent controller] error: ", error)
-            return response.render('students/index', { errors: { opsError: "Something went wrong while searching student" } })
+            return response.render('students/index', { errors: { opsError: "Something went wrong while searching student" }, fileName: null })
         }
     },
 
@@ -178,7 +182,7 @@ module.exports = {
 
         } catch (error) {
             console.log("[updateStudent controller] error: ", error)
-            return response.render('students/index', { errors: { opsError: "Something went wrong while updating student details" } })
+            return response.render('students/index', { errors: { opsError: "Something went wrong while updating student details" }, fileName: null })
         }
     },
 
@@ -187,12 +191,12 @@ module.exports = {
             const studentId = request.params.student_id;
             const result = await studentsModel.deleteStudentById(studentId);
             if (result === constants.resultFlag.error) {
-                return response.render('students/index', { errors: { opsError: "Something went wrong while deleting student" } })
+                return response.render('students/index', { errors: { opsError: "Something went wrong while deleting student" }, fileName: null })
             }
-            return response.render('students/index', { errors: { opsError: "Student deleted successfully" } })
+            return response.render('students/index', { errors: { opsError: "Student deleted successfully" }, fileName: null })
         } catch (error) {
             console.log("[deleteStudent controller] error: ", error)
-            return response.render('students/index', { errors: { opsError: "Something went wrong while deleting student" } })
+            return response.render('students/index', { errors: { opsError: "Something went wrong while deleting student" }, fileName: null })
         }
     },
 
@@ -202,7 +206,26 @@ module.exports = {
             return response.render('students/details-page', { data: data })
         } catch (error) {
             console.log("[getStudentDetails controller] error: ", error)
-            return response.render('students/index', { errors: { opsError: "Something went wrong while deleting student" } })
+            return response.render('students/index', { errors: { opsError: "Something went wrong while deleting student" }, fileName: null })
+        }
+    },
+
+    exportStudentData: async function (request, response) {
+        try {
+            const data = await studentsModel.getStudentData()
+            const exportDir = path.resolve(__dirname, '../', 'public/exports')
+            const time = moment().utcOffset("+05:30").format('YYYYMMDDHHmmss')
+            const fileName = 'studentData_' + String(time) + '.csv'
+            const endPath = exportDir + '/' + fileName
+            const ws = fs.createWriteStream(endPath)
+            fastcsv.write(
+                data,
+                { headers: true }
+            ).on("finish", () => {
+                return response.render('students/index', { errors: {}, fileName: fileName })
+            }).pipe(ws)
+        } catch (error) {
+            return response.render('students/index', { errors: { exportError: "Something went wrong while exporting report" }, fileName: null })
         }
     }
 }

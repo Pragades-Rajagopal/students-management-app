@@ -8,7 +8,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Add a student</h5>
-                        <a class="card-link" href="/app/students/add">Add a student</a>
+                        <a class="card-link" href="/app/students/add">Add a student ➝</a>
                     </div>
                 </div>
             </div>
@@ -21,15 +21,17 @@
                                 <%= errors.student_id.msg %>
                                     <% } %>
                                         <% if (errors.noData) { %>
-                                            <%= errors.noData %>
-                                                <% } %>
-                                                    <% if (errors.opsError) { %>
-                                                        <%= errors.opsError %>
-                                                            <% } %>
-                                                                <input type="text"
-                                                                    class="form-control shadow-none mb-3 phText"
-                                                                    name="student_id"
-                                                                    placeholder="Enter Student ID to search">
+                                            <div class="error-msg">
+                                                <%= errors.noData %>
+                                            </div>
+                                            <% } %>
+                                                <% if (errors.opsError) { %>
+                                                    <%= errors.opsError %>
+                                                        <% } %>
+                                                            <input type="text"
+                                                                class="form-control shadow-none mb-3 phText"
+                                                                name="student_id"
+                                                                placeholder="Enter Student ID to search">
                         </form>
                     </div>
                 </div>
@@ -41,7 +43,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">View all student details</h5>
-                        <a class="card-link" href="/app/students/details">View Student Details</a>
+                        <a class="card-link" href="/app/students/details">View Student Details ➝</a>
                     </div>
                 </div>
             </div>
@@ -49,11 +51,24 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Export student details</h5>
-                        <a class="card-link" href="/app/students/export">Export</a>
+                        <% if (errors.exportError) { %>
+                            <div class="error-msg">
+                                <%= errors.exportError %>
+                            </div>
+                            <% } %>
+                                <a class="card-link" href="/app/students/export">Export ➝</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <%- include('../footer') %>
+    <% if (fileName) { %>
+        <a href="/public/exports/<%= fileName %>" download="<%= fileName %>" id="download-link"></a>
+        <% } %>
+
+            <script>
+                document.getElementById('download-link').click();
+            </script>
+
+            <%- include('../footer') %>
