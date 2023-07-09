@@ -30,5 +30,6 @@ Router.post('/settings/department/add', settingsValidator.addDepartment, setting
 Router.post('/settings/stream/add', settingsValidator.addStream, settingsController.addStream)
 Router.post('/settings/department/delete', settingsValidator.deleteDepartment, settingsController.deleteDepartment)
 Router.post('/settings/stream/delete', settingsValidator.deleteStream, settingsController.deleteStream)
+Router.get('/students/export', studentsController.exportStudentData)
 
 module.exports = Router;
